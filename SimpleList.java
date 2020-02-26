@@ -20,7 +20,7 @@ public class SimpleList{
 		count = 0;
 	}
 	/**
-	 *Takes a new integer as input  and adds the element to the start of the list, and shifts every other entry to the right by 1.
+	 *Takes an integer as input  and adds the element to the start of the list, and shifts every other entry to the right by 1.
 	 *If the list is already full, its size is increased by 50%.
 	 */
 	public void add(int newInt) {
@@ -39,6 +39,22 @@ public class SimpleList{
 		}
 		list[0] = newInt;
 		count++;
+	}
+	/**
+	 *Takes an integer as input and adds the element to the end of the list.
+	 *If the list is already full, its size is increased by 50%.
+	 */
+	public void append(int newInt) {
+		if (count == list.length) {
+			int newLength = list.length+list.length/2;
+			int[] newList = new int[newLength];
+			for (int index = 0; index <count;index++) {
+				newList[index] = list[index];
+			}
+			list = newList;
+		}	
+		count++;
+		list[count-1] = newInt;
 	}
 	/**
 	 *Takes an integer as input parameter and searches for the element with the specified value and shifts the remaining entries to the left to avoid empty entries.
@@ -71,13 +87,13 @@ public class SimpleList{
 		}
 	}
 	/**
-	 *Returns the length of the list. (no input parameter)
+	 *Returns the length of the list(count). (no input parameter)
 	 */
 	public int count() {
 		return count;
 	}
 	/**
-	 *Returns the string representation of the list, where elements are seperated by spaces. (no input parameter)
+	 *Returns the string representation of the list, where elements are separated by spaces. (no input parameter)
 	 */
 	public String toString() {
 		String output = new String();
@@ -105,5 +121,17 @@ public class SimpleList{
 			}
 		}
 		return location;
+	}
+	/**
+	 *Returns the first element(int) of the list (no input parameter)
+	 */
+	public int first() {
+		return list[0];
+	}
+	/**
+	 *Returns the length (int) of the list array, which is the current number of possible locations in the list (no input parameter)
+	 */
+	public int size() {
+		return list.length;
 	}
 }

@@ -21,25 +21,29 @@ public class SimpleList{
 	}
 	/**
 	 *Takes a new integer as input  and adds the element to the start of the list, and shifts every other entry to the right by 1.
-	 *If the list is already full, the last elements gets replaced with the one preceding it. 
+	 *If the list is already full, its size is increased by 50%.
 	 */
 	public void add(int newInt) {
 		int shiftStart = count - 1;
-		if (count == 10) {
-			shiftStart--; // if list is full last element does not get shifted
+		if (count == list.length) {
+			int newLength = list.length+list.length/2;
+			int[] newList = new int[newLength];
+			for (int index = 0; index <count;index++) {
+				newList[index] = list[index];
+			}
+			list = newList;
 		}
 		
 		for (int index = shiftStart; index >= 0 ; index--) {
 			list[index+1] = list[index];
 		}
 		list[0] = newInt;
-		if (count < 10) {
-			count++;
-		}
+		count++;
 	}
 	/**
 	 *Takes an integer as input parameter and searches for the element with the specified value and shifts the remaining entries to the left to avoid empty entries.
-	 *If there are multiple entries with the specified value, all of them get removed.
+	 *If there are multiple entries with the specified value, the first gets removed. 
+	 *If the list has more than 25% empty places, the size of the list gets decreased by 25%
 	 */
 	public void remove(int removeValue) {
 		boolean removed = false;
@@ -54,6 +58,16 @@ public class SimpleList{
 				removed = true;
 			}
 			
+		}
+		int emptyEntries = list.length - count;
+		if (1.0*emptyEntries/(1.0*list.length) > 0.25) { //multiplied by 1.0 to cast it to float 
+			int newLength = list.length-list.length/4;
+			int[] newList = new int[newLength];
+			for (int index = 0; index <count;index++) {
+				newList[index] = list[index];
+			}
+			list = newList;
+					
 		}
 	}
 	/**
@@ -81,7 +95,7 @@ public class SimpleList{
 	/**
 	 *Takes an the search value integer as input and searches for the specified value and returns its index in the list.
 	 *If there is no matching integer in the list, returns -1.
-	 *If there are multiple instances, it returns the last location. 
+	 *If there are multiple instances, it returns the first location. 
 	 */
 	public int search(int searchValue) {
 		int location = -1;

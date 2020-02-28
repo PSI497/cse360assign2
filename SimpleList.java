@@ -1,8 +1,8 @@
 // Name: Márk Lakatos-Tóth
 // Class ID: 203
-// Assignment 1
+// Assignment 2
 // Description: This file contains the class SimpleList and its methods
-package assign1;
+package cse360assign2;
 
 /**
  * Contains a list of integers of maximum length 10, with adding and removing functionality
@@ -123,13 +123,27 @@ public class SimpleList{
 		return location;
 	}
 	/**
-	 *Returns the first element(int) of the list (no input parameter)
+	 *Returns the first element(int) of the list (no input parameter). If there are no elements in the list, returns -1
 	 */
 	public int first() {
-		return list[0];
+		if (count > 0){
+			return list[0];
+		}else {
+			return -1;
+		}
 	}
 	/**
-	 *Returns the length (int) of the list array, which is the current number of possible locations in the list (no input parameter)
+	 *Returns the last element(int) of the list (no input parameter). If there are no elements in the list, returns -1
+	 */
+	public int last() {
+		if (count > 0){
+			return list[count-1];
+		}else {
+			return -1;
+		}
+	}
+	/**
+	 *Returns the length (int) of the list array, which is the current number of possible locations in the list. (no input parameter)
 	 */
 	public int size() {
 		return list.length;
